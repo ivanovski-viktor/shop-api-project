@@ -1,14 +1,15 @@
 import "./styles/main.scss";
+import Product from "./product.js";
 
-function component() {
-  console.log("working");
-  const element = document.createElement("div");
-  //Lodash imported
-  element.innerHTML = `<div class="firstClass">
-    Hello World!
-  </div>`;
+document.body.appendChild(await Product());
+// function main() {
+//   const productsArray = Products();
+//   const element = document.createElement("div");
+//   //Lodash imported
+//   element.innerHTML = `<div class="firstClass">
+//   </div>`;
 
-  return element;
-}
+//   return element;
+// }
 
-document.body.appendChild(component());
+// document.body.appendChild(product());
