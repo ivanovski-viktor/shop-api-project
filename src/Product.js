@@ -1,8 +1,9 @@
 import "./styles/products.scss";
 import Products from "./Products.js";
 
-export default async function Product() {
+export default async function Product(inputCategory, sortValue) {
   const productsArray = await Products();
+  console.log(productsArray);
   function clickHandler(e) {
     console.log(e.target);
     e.target.classList.toggle("clicked");
@@ -15,10 +16,40 @@ export default async function Product() {
   }
 
   const container = document.createElement("div");
-  productsArray.forEach(({ title, image, price, description }) => {
+  switch (sortValue) {
+    case "a-z":
+      await productsArray.sort((a, b) => a.title.localeCompare(b.title));
+      break;
+    case "z-a":
+      await productsArray.sort((a, b) => b.title.localeCompare(a.title));
+      break;
+    case "low-high":
+      await productsArray.sort((a, b) => a.price - b.price);
+      break;
+    case "high-low":
+      await productsArray.sort((a, b) => b.price - a.price);
+      break;
+    default:
+  }
+  productsArray.forEach(({ title, image, price, category }) => {
     const element = document.createElement("div");
-
-    element.innerHTML = `<div class="productCard">
+    if (inputCategory == category) {
+      element.innerHTML = `<div class="productCard">
+      <h5>${title}</h5>
+      <img src="${image}">
+      <span class="priceContainer">
+      ${
+        price > 200
+          ? `<span class="productPrice">$${price}</span><span class="discountPrice">$${Math.round(
+              price - (10 / 100) * price
+            )}</span>`
+          : `<span>$${price}</span>`
+      }
+        </span>
+        <button class="addToCartButton">Add To Cart</button>
+        </div>`;
+    } else if (inputCategory == "all") {
+      element.innerHTML = `<div class="productCard">
         <h5>${title}</h5>
         <img src="${image}">
         <span class="priceContainer">
@@ -29,9 +60,10 @@ export default async function Product() {
               )}</span>`
             : `<span>$${price}</span>`
         }
-        </span>
-        <button class="addToCartButton">Add To Cart</button>
-  </div>`;
+          </span>
+          <button class="addToCartButton">Add To Cart</button>
+          </div>`;
+    }
     container.classList.add("productContainer");
     container.appendChild(element);
     const addToCartButtons = element.querySelectorAll(".addToCartButton");
