@@ -32,8 +32,8 @@ export default async function Product(inputCategory, sortValue) {
     default:
   }
   productsArray.forEach(({ title, image, price, category }) => {
-    const element = document.createElement("div");
-    if (inputCategory == category) {
+    if (inputCategory === category || inputCategory === "all") {
+      const element = document.createElement("div");
       element.innerHTML = `<div class="productCard">
       <h5>${title}</h5>
       <img src="${image}">
@@ -48,28 +48,13 @@ export default async function Product(inputCategory, sortValue) {
         </span>
         <button class="addToCartButton">Add To Cart</button>
         </div>`;
-    } else if (inputCategory == "all") {
-      element.innerHTML = `<div class="productCard">
-        <h5>${title}</h5>
-        <img src="${image}">
-        <span class="priceContainer">
-        ${
-          price > 200
-            ? `<span class="productPrice">$${price}</span><span class="discountPrice">$${Math.round(
-                price - (10 / 100) * price
-              )}</span>`
-            : `<span>$${price}</span>`
-        }
-          </span>
-          <button class="addToCartButton">Add To Cart</button>
-          </div>`;
+      container.classList.add("productContainer");
+      container.appendChild(element);
+      const addToCartButtons = element.querySelectorAll(".addToCartButton");
+      addToCartButtons.forEach((button) => {
+        button.addEventListener("click", clickHandler);
+      });
     }
-    container.classList.add("productContainer");
-    container.appendChild(element);
-    const addToCartButtons = element.querySelectorAll(".addToCartButton");
-    addToCartButtons.forEach((button) => {
-      button.addEventListener("click", clickHandler);
-    });
   });
   return container;
 }

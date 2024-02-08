@@ -16,8 +16,8 @@ function root() {
               <option value="jewelery">Jewelery</option>
               </select>
               <select class="sortValue">
-              <option value="a-z">Name A-Z</option>
-              <option value="z-a">Name Z-A</option>
+              <option value="a-z">Name: A-Z</option>
+              <option value="z-a">Name: Z-A</option>
               <option value="low-high">Price: Low to High</option>
               <option value="high-low">Price: High to Low</option>
               </select></aside>
