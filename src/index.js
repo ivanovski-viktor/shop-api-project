@@ -4,8 +4,10 @@ import Product from "./Product.js";
 function root() {
   return ` <div class="root">
             <header class="shopHeader">
-              <img class="shopLogo" src="" alt="Shop Logo">
-              <nav></nav>
+            <div class="logoContainer">
+            <img class="shopLogo" src="https://cdn.dribbble.com/users/375862/screenshots/5802423/media/103cfbe7712d60b2bc5ceab22df3c534.gif" alt="Shop Logo">
+            </div>
+              <h1 class="permanent-marker-regular">Fireshop</h1>
             </header>
             <main class="shopMain"> 
               <aside class="sideBar"><select class="categories">
